@@ -21,7 +21,7 @@ public class Ator {
     @JsonProperty("_id")
     private Long id;
 
-    @Column(length = 255, nullable = false)
+    @Column(length = 100, nullable = false)
     private String nome;
 
     @ManyToMany(mappedBy = "atores")

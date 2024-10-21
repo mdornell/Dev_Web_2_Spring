@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-VideoLocadoraApplication<videoLocadora>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.videoLocadora.VideoLocadoraApplication",
+            "projectName": "videoLocadora",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
