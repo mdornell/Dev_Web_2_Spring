@@ -28,7 +28,7 @@ public class Classe {
     @Column(nullable = false)   
     private double valor;
 
-    @Column(nullable = false)
+    @Column
     private Date prazoDevolucao;
 
     @OneToMany(mappedBy = "classe")

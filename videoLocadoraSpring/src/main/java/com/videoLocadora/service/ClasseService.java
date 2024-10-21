@@ -1,7 +1,7 @@
 package com.videoLocadora.service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -39,22 +39,7 @@ public class ClasseService {
     }
 
     public ClasseDTO adicionarClasse(ClasseDTO classe) {
-        // Format the date to dd/MM/yyyy
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedPrazo = classe.prazoDeDevolucao().toInstant()
-                .atZone(ZoneId.systemDefault())
-                .format(formatter);
-
-        // Cria um novo objeto ClasseDTO com a data formatada
-        ClasseDTO classeComDataFormatada = new ClasseDTO(
-                classe.id(),
-                classe.nome(),
-                classe.valor(),
-                Date.from(LocalDate.parse(formattedPrazo, formatter)
-                        .atStartOfDay(ZoneId.systemDefault())
-                        .toInstant()));
-
-        return classeMapper.toDTO(classeRepository.save(classeMapper.toEntity(classeComDataFormatada)));
+        return classeMapper.toDTO(classeRepository.save(classeMapper.toEntity(classe)));
     }
 
     public ClasseDTO atualizarClasse(Long id, ClasseDTO classeAtualizado) {
@@ -62,22 +47,16 @@ public class ClasseService {
 
         return classeRepository.findById(id)
                 .map(classe -> {
-                    String formattedPrazo = classeAtualizado.prazoDeDevolucao().toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .format(formatter);
-
-                    // Cria um novo objeto ClasseDTO com os valores atualizados
-                    ClasseDTO classeAtualizada = new ClasseDTO(
-                            classe.getId(),
-                            classeAtualizado.nome(),
-                            classeAtualizado.valor(),
-                            Date.from(LocalDate.parse(formattedPrazo, formatter)
-                                    .atStartOfDay(ZoneId.systemDefault())
-                                    .toInstant()));
-
-                    return classeMapper.toDTO(classeRepository.save(classeMapper.toEntity(classeAtualizada)));
+                    classe.setNome(classeAtualizado.nome());
+                    classe.setValor(classeAtualizado.valor());
+                    String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(classeAtualizado.prazoDeDevolucao());
+                    LocalDate localDate = LocalDate.parse(formattedDate, formatter);
+                    Date date = java.sql.Date.valueOf(localDate);
+                    classe.setPrazoDevolucao(date);
+                    return classeMapper.toDTO(classeRepository.save(classe));
                 })
                 .orElseThrow(() -> new RecordNotFoundException(id));
+                    
     }
 
     public void deletarAtor(Long id) {
