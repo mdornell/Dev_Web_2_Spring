@@ -29,26 +29,26 @@ public class DiretorService {
         .toList();
     }
 
-     public DiretorDTO buscarAtorPorId(Long id) {
+     public DiretorDTO buscarDiretorPorId(Long id) {
         return diretorRepository.findById(id)
         .map(diretorMapper::toDTO)
         .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public DiretorDTO adicionarAtor(DiretorDTO ator) {
-        return diretorMapper.toDTO(diretorRepository.save(diretorMapper.toEntity(ator)));
+    public DiretorDTO adicionarDiretor(DiretorDTO diretor) {
+        return diretorMapper.toDTO(diretorRepository.save(diretorMapper.toEntity(diretor)));
     }
 
-    public DiretorDTO atualizarAtor(Long id, DiretorDTO atorAtualizado) {
+    public DiretorDTO atualizarDiretor(Long id, DiretorDTO diretorAtualizado) {
         return diretorRepository.findById(id)
-                .map(ator -> {
-                    ator.setNome(atorAtualizado.nome());
-                    return diretorMapper.toDTO(diretorRepository.save(ator));
+                .map(diretor -> {
+                    diretor.setNome(diretorAtualizado.nome());
+                    return diretorMapper.toDTO(diretorRepository.save(diretor));
                 })
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public void deletarAtor(Long id) {
+    public void deletarDiretor(Long id) {
         diretorRepository.delete(diretorRepository.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id)));
     }
