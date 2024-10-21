@@ -1,11 +1,15 @@
 package com.videoLocadora;
 
+import java.util.Date;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.videoLocadora.domain.controle_acervo.Ator;
+import com.videoLocadora.domain.controle_acervo.Classe;
+import com.videoLocadora.domain.controle_acervo.Diretor;
 import com.videoLocadora.repository.AtorRepository;
 import com.videoLocadora.repository.ClasseRepository;
 import com.videoLocadora.repository.DiretorRepository;
@@ -39,21 +43,21 @@ public class VideoLocadoraApplication {
             a4.setNome("Beatriz");
             aR.save(a4);
 
-			// Criando um diretor
-			// dR.deleteAll();
+			//Criando um diretor
+			dR.deleteAll();
 
-			// Diretor d = new Diretor();
-			// d.setNome("João");
-			// dR.save(d);
+			Diretor d = new Diretor();
+			d.setNome("João");
+			dR.save(d);
 
-			// Criando uma classe
-			// cR.deleteAll();
+			//Criando uma classe
+			cR.deleteAll();
 
-			// Classe c = new Classe();
-			// c.setNome("Ação");
-			// c.setPrazoDevolucao(new java.sql.Date(System.currentTimeMillis()));
-			// c.setValor(0);
-			// cR.save(c);
+			Classe c = new Classe();
+			c.setNome("Ação");
+			c.setPrazoDevolucao(new Date());
+			c.setValor(1.5);
+			cR.save(c);
 
 		};
 	}
