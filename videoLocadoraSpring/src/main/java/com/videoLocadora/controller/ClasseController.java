@@ -38,6 +38,7 @@ public class ClasseController {
     // Adiciona novo classe
     @PostMapping("/add")
     public ClasseDTO adicionarClasse(@RequestBody ClasseDTO classe) {
+        System.out.println("\n\n\n\n\n\n\n\n"+classe+"\n\n\n\n\n\n\n\n");
         return classeService.adicionarClasse(classe);
     }
 

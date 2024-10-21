@@ -31,25 +31,25 @@ public class DiretorController {
 
     @GetMapping("/list/{id}")
     public DiretorDTO buscarAtorPorId(@PathVariable Long id) {
-        return diretorService.buscarAtorPorId(id);
+        return diretorService.buscarDiretorPorId(id);
     }
 
     // Adiciona novo ator
     @PostMapping("/add")
     public DiretorDTO adicionarAtor(@RequestBody DiretorDTO ator) {
-        return diretorService.adicionarAtor(ator);
+        return diretorService.adicionarDiretor(ator);
     }
 
     // Atualiza ator
     @PutMapping("/update/{id}")
     public DiretorDTO atualizarAtor(@PathVariable Long id, @RequestBody DiretorDTO ator) {
-        return diretorService.atualizarAtor(id, ator);
+        return diretorService.atualizarDiretor(id, ator);
     }
 
     // Deleta ator
     @DeleteMapping("/delete/{id}")
     public void deletarAtor(@PathVariable Long id) {
-        diretorService.deletarAtor(id);
+        diretorService.deletarDiretor(id);
     }
 
     
